@@ -15,7 +15,7 @@ connectDB();
 
 // Configuration CORS
 app.use(cors({
-  origin: ['http://localhost:5173', 'http://localhost:3000', 'http://localhost:5175', 'http://localhost:5176'],
+  origin: ['https://gestion-stations-app.azurewebsites.net', 'http://localhost:5173', 'http://localhost:3000', 'http://localhost:5175', 'http://localhost:5176'],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
@@ -69,6 +69,12 @@ app.use((err, req, res, next) => {
 // Catch-all route for invalid endpoints
 app.use((req, res) => {
   res.status(404).json({ message: 'Route non trouvée' });
+});
+
+
+app.use(express.static(path.join(__dirname, 'build')));
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
 // Démarrage du serveur
