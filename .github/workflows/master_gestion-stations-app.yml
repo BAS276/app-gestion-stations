@@ -18,11 +18,9 @@ jobs:
         with:
           node-version: '18.x'
 
-      - name: Change directory to backend
-        run: cd backend
-
-      - name: npm install, build
+      - name: npm install and build in backend
         run: |
+          cd backend
           npm install
           npm run build --if-present
 
